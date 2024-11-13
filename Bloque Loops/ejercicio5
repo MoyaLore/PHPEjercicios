@@ -1,0 +1,16 @@
+<?php
+
+$n1 = -5; 
+
+// Si el número es negativo, lo convierte a positivo
+if ($n1 < 0) {
+    $n1 = abs($n1);
+}
+
+echo "Contando desde $n1 hacia 0:<br>";
+
+for ($i = $n1; $i >= 0; $i--) {
+    echo $i . "<br>";
+}
+
+?>

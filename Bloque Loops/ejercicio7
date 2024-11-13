@@ -1,0 +1,23 @@
+<?php
+
+$n1 = 13; // Puedes cambiar este valor para probar con diferentes números
+
+echo "Divisores de $n1:<br>";
+
+$divisores = 0; // Contador para divisores
+
+for ($i = 1; $i <= $n1; $i++) {
+    if ($n1 % $i == 0) {
+        echo $i . "<br>";
+        $divisores++; // Incrementa el contador de divisores
+    }
+}
+
+// Comprobar si el número es primo
+if ($divisores == 2) {
+    echo "$n1 es un número primo.";
+} else {
+    echo "$n1 no es un número primo.";
+}
+
+?>

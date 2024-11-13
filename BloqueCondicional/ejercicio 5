@@ -1,12 +1,20 @@
-<!DOCTYPE html>
-<html>
-<body>
-
 <?php
 
-$lluvia=
-$temperatura=
-?> 
+$lluvia = false;
+$temperatura = 22;
 
-</body>
-</html>
+if ($temperatura < -10 || $temperatura > 40) {
+    echo "La temperatura es $temperatura y es una temperatura extrema. No se puede realizar actividad.";
+} elseif ($lluvia) {
+    echo "Hoy llueve y debes quedarte en casa.";
+} else {
+    if ($temperatura > 20) {
+        echo "La temperatura es $temperatura y no llueve. A la playa";
+    } elseif ($temperatura >= -10 && $temperatura <= 5) {
+        echo "La temperatura es $temperatura y no llueve. A esquiar";
+    } elseif ($temperatura > 5 && $temperatura <= 20) {
+        echo "La temperatura es $temperatura y no llueve. De paseo";
+    }
+}
+
+?>
