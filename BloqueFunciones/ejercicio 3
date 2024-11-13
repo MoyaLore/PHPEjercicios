@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <?php
+$altura=readline('Dame una altura');
+$base = readline('Dame una base');
+
+function area($base, $altura){
+$area=$base*$altura;
+return $area;
+
+}
+
+function perimentro($base, $altura){
+$perimetro=$base+$altura*2;
+return $perimetro;
+}
+
+array($perimetro, $area);
+
+  ?>  
+</body>
+</html>
