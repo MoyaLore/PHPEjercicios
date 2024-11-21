@@ -1,0 +1,24 @@
+<?php
+// Incluir la conexión a la base de datos
+include 'conectar.php';
+
+// Comprobar si se ha recibido el ID y los nuevos datos para actualizar
+if (isset($_POST['id']) && isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['email'])) {
+    $id = $_POST['id'];
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $email = $_POST['email'];
+
+    // SQL para actualizar el usuario
+    $sql = "UPDATE usuarios SET nombre='$nombre', apellido='$apellido', email='$email' WHERE id=$id";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Usuario actualizado correctamente.";
+    } else {
+        echo "Error: " . $conn->error;
+    }
+}
+
+// Cerrar la conexión
+$conn->close();
+?>

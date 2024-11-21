@@ -1,0 +1,21 @@
+<?php
+include 'conectar.php';
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    try {
+        $sql = "DELETE FROM usuarios WHERE id = $id";
+        if ($conn->query($sql) === TRUE) {
+            echo "Usuario eliminado correctamente.";
+        } else {
+            echo "Error: " . $conn->error;
+        }
+    } catch (mysqli_sql_exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+header('Location: index.php');  // Redirigir a la página principal después de eliminar
+$conn->close();
+?>

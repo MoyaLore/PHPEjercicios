@@ -1,0 +1,23 @@
+<?php
+include 'conectar.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $email = $_POST['email'];
+
+    try {
+        $sql = "INSERT INTO usuarios (nombre, apellido, email) VALUES ('$nombre', '$apellido', '$email')";
+        if ($conn->query($sql) === TRUE) {
+            echo "Nuevo usuario añadido correctamente.";
+        } else {
+            echo "Error: " . $conn->error;
+        }
+    } catch (mysqli_sql_exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+header('Location: index.php');  // Redirigir a la página principal después de insertar
+$conn->close();
+?>

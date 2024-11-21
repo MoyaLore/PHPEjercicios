@@ -1,0 +1,22 @@
+<?php
+// Incluir la conexión a la base de datos
+include 'conectar.php';
+
+// Comprobar si se ha recibido los datos para añadir un usuario
+if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['email'])) {
+$nombre = $_POST['nombre'];
+$apellido = $_POST['apellido'];
+$email = $_POST['email'];
+
+// SQL para añadir un usuario
+$sql = "INSERT INTO usuarios (nombre, apellido, email) VALUES ('$nombre', '$apellido', '$email')";
+
+if ($conn->query($sql) === TRUE) {
+echo "Nuevo usuario añadido correctamente.";
+} else { echo "Error: " . $conn->error;
+    }
+}
+
+// Cerrar la conexión
+$conn->close();
+?>

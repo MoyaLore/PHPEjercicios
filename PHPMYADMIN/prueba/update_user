@@ -1,0 +1,46 @@
+<?php
+include 'conectar.php';
+
+// Si se envía el formulario, actualiza los datos del usuario
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
+    $id = $_POST['id'];
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $email = $_POST['email'];
+
+    try {
+        $sql = "UPDATE usuarios SET nombre='$nombre', apellido='$apellido', email='$email' WHERE id=$id";
+        if ($conn->query($sql) === TRUE) {
+            echo "Usuario actualizado correctamente.";
+        } else {
+            echo "Error: " . $conn->error;
+        }
+    } catch (mysqli_sql_exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+
+    header('Location: index.php');  // Redirigir a la página principal después de actualizar
+}
+
+// Si se pasa un ID por GET, muestra el formulario de edición
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    $sql = "SELECT id, nombre, apellido, email FROM usuarios WHERE id = $id";
+    $result = $conn->query($sql);
+    $user = $result->fetch_assoc();
+
+    if ($user) {
+        echo "<h2>Modificar Usuario</h2>";
+        echo "<form method='POST' action=''>
+                <input type='hidden' name='id' value='".$user['id']."'>
+                <input type='text' name='nombre' value='".$user['nombre']."' required>
+                <input type='text' name='apellido' value='".$user['apellido']."' required>
+                <input type='email' name='email' value='".$user['email']."' required>
+                <button type='submit'>Actualizar Usuario</button>
+              </form>";
+    }
+}
+
+$conn->close();
+?>

@@ -1,0 +1,43 @@
+<?php
+include 'conectar.php';
+
+// Mostrar los usuarios desde la base de datos
+try {
+    $sql = "SELECT id, nombre, apellido, email FROM usuarios";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        echo "<h2>Lista de Usuarios</h2>";
+        echo "<table border='1'>
+                <tr><th>ID</th><th>Nombre</th><th>Apellido</th><th>Email</th><th>Acciones</th></tr>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>
+                    <td>".$row["id"]."</td>
+                    <td>".$row["nombre"]."</td>
+                    <td>".$row["apellido"]."</td>
+                    <td>".$row["email"]."</td>
+                    <td>
+                        <a href='update_user.php?id=".$row['id']."'>Modificar</a> | 
+                        <a href='delete_user.php?id=".$row['id']."' onclick='return confirm(\"¿Seguro que quieres eliminar este usuario?\");'>Eliminar</a>
+                    </td>
+                </tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "No hay usuarios registrados.";
+    }
+} catch (mysqli_sql_exception $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+$conn->close();
+?>
+
+<!-- Formulario para agregar nuevos usuarios -->
+<h2>Añadir Nuevo Usuario</h2>
+<form action="add_user.php" method="POST">
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="text" name="apellido" placeholder="Apellido" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <button type="submit">Añadir Usuario</button>
+</form>
